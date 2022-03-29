@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void add(int a, int b){
-    printf("%d", a+b);
+int main(void){
+    int a,b;
+    a = 2;
+    b = 3;
+    add(a,b);
 }
