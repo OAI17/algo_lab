@@ -1,3 +1,0 @@
-el ej1 se puede hacer con el ej que esta al fondo del main
-esta bien la consigna del ej2 
-y en ej 3 hace falta que importe las mismas cosas en el main que en el helpers.c ? no estaria importando dos veces lo mismo ?
