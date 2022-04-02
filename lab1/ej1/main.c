@@ -42,29 +42,33 @@ char *parse_filepath(int argc, char *argv[]) {
 }
 
 unsigned int array_from_file(int array[],unsigned int max_size,const char *filepath) {
-    //char buffer[max_size];
-    //fscanf(myFile,"%d",buffer)!= EOF
-    
     FILE *myFile; 
     myFile = fopen(filepath, "r");
 
-    if (myFile == NULL){
-        printf("Error opening the file");}
+    if (!(myFile == NULL)){
+        fscanf(myFile,"%u\n",&max_size);
+        //printf("El tamaño del arreglo es %u \n", max_size);
 
-    fscanf(myFile,"%u\n",&max_size);
-    //printf("El tamaño del arreglo es %u \n", max_size);
-    
-    for (unsigned int i =0; i < max_size; i++){
-        fscanf(myFile,"%d",&array[i]);} 
+        for (unsigned int i =0; i < max_size; i++){
+            fscanf(myFile,"%d",&array[i]);
+        } 
 
-    fclose(myFile); 
-    return max_size;    
+        fclose(myFile); 
+        return max_size;          
+    }
+
+    else{
+        printf("Error opening the file");
+        return EXIT_FAILURE;
+    }
+      
     }
 
 void array_dump(int a[], unsigned int length) {
     printf("%d \n", length);
     if (length == 0){
-        printf("No hay arreglo");}
+        printf("No hay arreglo");
+    }
 
     for (unsigned int i=0; i < length; i++){
         printf("%d ",a[i]);
@@ -90,24 +94,3 @@ int main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-/*
-#define NOMBRE_ARCHIVO "text.txt" //defino el archivo que voy a leer
-#define LONGITUD_MAX 1000 //defino el tomaNo maximo por linea
-
-
-void read_array(void){
-    int i;
-    FILE *myFile = fopen(NOMBRE_ARCHIVO, "r");
-    char line[LONGITUD_MAX],n;
-    n = fgets(line,LONGITUD_MAX,myFile);
-    char array[4];
-    i = 0;
-    while (fgets(line,LONGITUD_MAX,myFile))
-    {
-        array[i] = line;
-        i = i + 1;
-
-    }
-    
-}
-*/

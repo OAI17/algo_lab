@@ -1,0 +1,5 @@
+-NO PIASR PARAMETROS DE FUNCOINES
+-Ver las respuestas que hacen las funciones, de si se ejecuta bien o no 
+-FILE *myFIle=stdin;
+-El punto o es para linkear con los demas archivos que me hacen falta para correr el archivo
+-Poner cosas de ifndef en mayuscula por convencion 

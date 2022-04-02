@@ -6,21 +6,20 @@
 
 #define MAX_SIZE 100000
 
-unsigned int array_from_file(int array[],unsigned int max_size) {
-    int n;
+unsigned int array_from_file(int array[]) {
+    int size;
     printf("Ingrese de que tamaño va a ser el arreglo: \n");
-    scanf("%d", &n);
-    max_size = n;
+    scanf("%d", &size);
     
-    if (max_size == 0){
+    if (size == 0){
         printf("Dato no valido, intertar otro numero mayor a cero");}
 
-    for (unsigned int i =0; i < max_size; i++){
+    for (int i = 0; i < size; i++){
         printf("Ingrese un valor para la posicion %d del arreglo: \n", i);
         scanf("%d", &array[i]);
     }    
     printf("\n");
-    return max_size;    
+    return size;    
     }
 
 void array_dump(int a[], unsigned int length) {
@@ -36,8 +35,7 @@ int main(void) {
     
     int array[MAX_SIZE];
     
-    unsigned int length = array_from_file(array, MAX_SIZE);
-    
+    unsigned int length = array_from_file(array);
     
     array_dump(array, length);
     

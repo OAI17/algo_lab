@@ -1,9 +1,9 @@
-#ifndef mybool_h
-#define mybool_h
+#ifndef MYBOOL_H
+#define MYBOOL_H
 
-    #define true 1 
-    #define false 0
+#define true 1 
+#define false 0
 
-    typedef int mybool; //typedef <existing_name> <alias_name>
-      
+typedef int mybool; //typedef <existing_name> <alias_name>
+    
 #endif
