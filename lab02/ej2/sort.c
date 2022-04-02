@@ -10,8 +10,9 @@
 static void quick_sort_rec(int a[], unsigned int izq, unsigned int der) {
  /* needs implementation */
     int pivot;
+
     if (der > izq){
-        pivot = partition(a,izq,der);
+        pivot = partition(a,izq,der); 
         quick_sort_rec(a,izq,pivot);
         quick_sort_rec(a,pivot+1,der);
     }
