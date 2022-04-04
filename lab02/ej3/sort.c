@@ -8,19 +8,42 @@
 #include "sort.h"
 
 
-static unsigned int partition(int a[], unsigned int izq, unsigned int der) {
-    /* Needs implementation */
+static unsigned int partition(int a[], unsigned int izq, unsigned int der){
+    int piv;
+    unsigned int j,i;
+    piv = izq;
+    i = izq+1;
+    j = der;
+    
+    while(i <= j){
+       if (goes_before(a[i],a[piv])){
+           i = i+1;
+       }
+       else{
 
-    /* Permutes elements of a[izq..der] and returns pivot such that:
-     - izq <= pivot <= der
-     - elements in a[izq,pivot) all 'go_before' (according to function goes_before) a[pivot]
-     - a[pivot] 'goes_before' all the elements in a(pivot,der]
-    */
+        if (goes_before(a[piv],a[j])){
+                j = j-1;
+            }
+        else{
+            if ((abs(a[i]) > abs(a[piv])) && (abs(a[j]) < abs(a[piv]))){
+                swap(a,i,j);
+                //i = i-1;
+                //j = j-1;
+            }
+        }
+
+       }
+       
+   }
+    
+    swap(a,j,piv);
+    piv = j;
+    return piv;
 }
 
 static void quick_sort_rec(int a[], unsigned int izq, unsigned int der) {
  /* needs implementation */
-    int pivot;
+    unsigned int pivot;
 
     if (der > izq){
         pivot = partition(a,izq,der); 
@@ -29,8 +52,8 @@ static void quick_sort_rec(int a[], unsigned int izq, unsigned int der) {
     }
 }
 
-
 void quick_sort(int a[], unsigned int length) {
     quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1);
+    
 }
 
