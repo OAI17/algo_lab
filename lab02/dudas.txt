@@ -1,0 +1,4 @@
+ej2) porque en quick_sort_rec anda si pongo piv y con piv-1 me tira "Segmentation fault (core dumped)"
+ej3) mismo error que arriba
+ej3) preguntar porque tengo que poner lass guardas de esa forma
+ej4) las variables que tengo que resetar son como internas y por eso antes de usarlas tengo que resetear?
