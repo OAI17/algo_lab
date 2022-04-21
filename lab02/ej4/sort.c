@@ -72,15 +72,22 @@ static unsigned int partition(int a[], unsigned int izq, unsigned int der){
 }
 
 static void quick_sort_rec(int a[], unsigned int izq, unsigned int der) {
+ /* needs implementation */
     int pivot;
 
     if (der > izq){
         pivot = partition(a,izq,der); 
-        quick_sort_rec(a,izq,pivot);
-        quick_sort_rec(a,pivot+1,der);
+        if (pivot == 0){
+            quick_sort_rec(a,izq,pivot);
+            quick_sort_rec(a,pivot+1,der);
+        }
+        else{
+            quick_sort_rec(a,izq,pivot-1);
+            quick_sort_rec(a,pivot+1,der);
+        }
+
     }
 }
-
 void quick_sort(int a[], unsigned int length) {
     quick_sort_rec(a, 0u, (length == 0u) ? 0u : length - 1u);
 }
