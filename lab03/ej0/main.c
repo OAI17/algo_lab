@@ -3,6 +3,30 @@
 
 #define MAX_SIZE 1000
 
+char *parse_filepath(int argc, char *argv[]) {
+    /* Parse the filepath given by command line argument. */
+    char *result = NULL;
+
+    if (argc < 2) {
+        exit(EXIT_FAILURE);
+    }
+
+    result = argv[1];
+    return result;
+}
+
+
+static void sort(unsigned int indexes, char letters[], char sorted[],unsigned int length){
+    unsigned int i=0;
+    while (sorted tenga la cantidad de lenght)
+    for (unsigned int j=0u; j <= length;){
+        if (indexes[j] = i){
+            sorted[i] = letters[i];
+            i = i+1;
+        }
+    }
+}
+
 static void dump(char a[], unsigned int length) {
     printf("\"");
     for (unsigned int j=0u; j < length; j++) {
@@ -12,29 +36,18 @@ static void dump(char a[], unsigned int length) {
     printf("\n\n");
 }
 
-
 unsigned int data_from_file(const char *path,unsigned int indexes[],char letters[],unsigned int max_size){
-        path = fopen(*path,"r");
-        if (path != NULL){
-            int elem=max_size;
-            int unsigned j=0;
-            char p;
-            
-            char p;
-            //fscanf devuelve EOF cuando se alcanza el final de la entrada
-            while(fscanf(*path, "%c", p) != E0F){
-                printf("%s \n",p);
-                  
-                //indexes[j] = agrege al indexes los numeros
-                //letters[j] = agrege al letters las letras
-                j = j+1;
-                elem = elem -1; 
-                
-                
+        FILE *file;
+        file = fopen(path,"r");
+        if (file != NULL){
+            unsigned int elem=0;
+
+            while(feof(file) == 0 && elem < max_size){
+                fscanf(file, "%u ",&indexes[elem]);
+                fscanf(file, "'%c'\n", &letters[elem]);
+                elem = elem +1; 
             }
-            fclose(path);
-            elem = max_size - (max_size-elem);
-            //asigne el ultimo i a una variable que va a ser la que devuelvo (max_size-indexes[ultima posicion])
+            fclose(file);
             return elem;
         }
         else{
@@ -43,25 +56,23 @@ unsigned int data_from_file(const char *path,unsigned int indexes[],char letters
         }
     }
 
+
 int main(int argc, char *argv[]) {
-    FILE *file;
+    
     unsigned int indexes[MAX_SIZE];
     char letters[MAX_SIZE];
-    //char sorted[MAX_SIZE];
+    char sorted[MAX_SIZE];
     unsigned int length=0; 
     
+    char *pointer_file = NULL;
+
+    pointer_file = parse_filepath(argc,argv);
     
-    //  .----------^
-    //  :
-    // Debe guardarse aqui la cantidad de elementos leidos del archivo
-    
-    /* -- completar -- */
+    length = data_from_file(pointer_file,indexes,letters,MAX_SIZE);
 
-
-    length = data_from_file(file,indexes,letters,MAX_SIZE);
-
-    //dump(sorted, length); 
-
+    dump(letters, length); 
+    //printf("%u\n", length);
     return EXIT_SUCCESS;
 }
+
 

@@ -1,1 +1,1 @@
-ej0) que es cadena de control de formato en parametro de scanf
+ej0) falta parte b 
