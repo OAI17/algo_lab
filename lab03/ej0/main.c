@@ -16,14 +16,11 @@ char *parse_filepath(int argc, char *argv[]) {
 }
 
 
-static void sort(unsigned int indexes, char letters[], char sorted[],unsigned int length){
-    unsigned int i=0;
-    while (sorted tenga la cantidad de lenght)
-    for (unsigned int j=0u; j <= length;){
-        if (indexes[j] = i){
-            sorted[i] = letters[i];
-            i = i+1;
-        }
+static void sort(unsigned int indexes[], char letters[], char sorted[],unsigned int length){
+    unsigned int i;
+    for (unsigned int j=0u; j < length; j++){        
+        i = indexes[j]; 
+        sorted[i] = letters[j];   
     }
 }
 
@@ -70,7 +67,8 @@ int main(int argc, char *argv[]) {
     
     length = data_from_file(pointer_file,indexes,letters,MAX_SIZE);
 
-    dump(letters, length); 
+    sort(indexes,letters,sorted,length);
+    dump(sorted, length); 
     //printf("%u\n", length);
     return EXIT_SUCCESS;
 }
