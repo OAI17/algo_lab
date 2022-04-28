@@ -1,3 +1,11 @@
+/*
+int usa %d
+float usa %f
+char usa %d
+strings usa %s
+*/
+
+
 #include <stdio.h>
 #include <assert.h>
 #include <stdbool.h>
