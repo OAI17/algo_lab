@@ -1,3 +1,45 @@
+/*
+int x =1;
+tuple m = {age,name};
+int a[] = {0,1,2,3};
+
+int *n = NULL;
+tuple *p = NULL;
+
+n = &x;
+*n = 9;
+
+p = &m;
+*p.age = 100;
+
+
+n = &a[1];
+*n =42;
+
+
+prinf("%d",x)
+prinf("(%d,%c)",m.age,m.name)
+prinf("d",a[1])
+
+
+*/
+
+/*
+
+int res =0;
+res = fscanf(file,"%u",size) //devuelve la cantidad de caracteres que lleyo bien
+
+if (res != 1){
+    printf(steder, "error")
+    return exit_succes 
+}
+
+
+
+*/
+
+
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -41,7 +83,7 @@ unsigned int data_from_file(const char *path,unsigned int indexes[],char letters
         file = fopen(path,"r");
         if (file != NULL){
             unsigned int elem=0;
-
+            //feof devuelve un valor dif de 0 cuando el puntero apunta a null (se fija a que apunta)
             while(feof(file) == 0 && elem < max_size){
                 fscanf(file, "%u ",&indexes[elem]);
                 fscanf(file, "'%c'\n", &letters[elem]);
