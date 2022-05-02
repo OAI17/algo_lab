@@ -59,6 +59,17 @@ void array_from_file(WeatherTable array, const char *filepath) {
         }
         Weather weather = weather_from_file(file);
         /* Completar acá: Guardar la medición de clima en el arreglo multidimensional */
+        
+        int a_temp,max_temp,min_temp;
+        unsigned int _pres,_mois,_rain;
+        int resp = fscanf(file, " %d %d %d %d %d %d ", &a_temp, &max_temp, &min_temp, &_pres, &_mois, &_rain);
+        
+        if (resp != 6){
+            fprintf(stderr, "Invalid array \n");
+        }
+        
+        asignasciones
+
     }
     fclose(file);
 }

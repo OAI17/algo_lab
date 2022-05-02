@@ -1,4 +1,5 @@
 /*
+PUNTEROS
 int x =1;
 tuple m = {age,name};
 int a[] = {0,1,2,3};
@@ -21,11 +22,7 @@ prinf("%d",x)
 prinf("(%d,%c)",m.age,m.name)
 prinf("d",a[1])
 
-
-*/
-
-/*
-
+ROBOSTO
 int res =0;
 res = fscanf(file,"%u",size) //devuelve la cantidad de caracteres que lleyo bien
 
@@ -33,11 +30,7 @@ if (res != 1){
     printf(steder, "error")
     return exit_succes 
 }
-
-
-
 */
-
 
 
 #include <stdlib.h>

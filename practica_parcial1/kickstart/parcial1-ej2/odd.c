@@ -10,23 +10,18 @@ static bool impar(unsigned int elem){
 }
 
 bool is_odd_sorted(int array[], unsigned int length) {
-    
-    unsigned int j=0u,temp;
-    bool status=true,imp;
-    
-    while (j<length && status){
-        
-        imp = impar(j);
-        (imp==true) ? temp=j : j++;
-        
-        if (imp){
-            if (!(array[temp] < array[j])){
-                status = false;
-                
-            }
-            j++;
+    bool status=true;
+    int valor;
+    unsigned j;
+    j = (length == 0) ? 0u : 1u;
+    valor = array[0];
+    impar(j) ? 
+    while(valor != array[j] && j < length && status){
+        if (!(valor <= array[j])){
+            status = false;
         }
-        
+        valor = array[j];
+        j++;
     }
 
     return status;
