@@ -2,8 +2,6 @@
 #include <stdlib.h>  
 #include <stdio.h>
 
-//typedef struct s_pair_t *pair_t;
-
 struct s_pair_t{
     int fst;
     int snd;
