@@ -10,12 +10,16 @@
 Flight flight_from_file(FILE* file, char code, item_t type)
 {
     
-    Flight flight;
-    flight.code = code;
-    flight.type = type;
+  Flight flight;
+  flight.code = code;
+  flight.type = type;
 
-    flight.hour = 
-    flight.items_amount = 
+  int j = fscanf(file,"%u %u ",&flight.hour,&flight.items_amount);
+  
+  if (j != 2){
+    printf("Error reading the file");
+    EXIT_FAILURE;
+  }
 
-    return flight;
-}
+  return flight;
+} 

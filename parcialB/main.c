@@ -72,7 +72,9 @@ int main(int argc, char *argv[]) {
     /* show the ordered array in the screen */
     array_dump(array);
 
-    printf("\nExtra fee cost: %u\n", /* COMPLETAR */);
+    unsigned int cost = extra_space_fee_cost(array);
+
+    printf("\nExtra fee cost: %u\n", cost);
 
     return (EXIT_SUCCESS);
 }
