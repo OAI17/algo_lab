@@ -1,4 +1,5 @@
 /* First, the standard lib includes, alphabetically ordered */
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,9 +19,9 @@ void print_help(char *program_name) {
 }
 
 char *parse_filepath(int argc, char *argv[]) {
-    /* Parse the filepath given by command line argument. */
     char *result = NULL;
 
+    /* Parse the filepath given by command line argument. */
     if (argc < 2) {
         print_help(argv[0]);
         exit(EXIT_FAILURE);
@@ -31,24 +32,62 @@ char *parse_filepath(int argc, char *argv[]) {
     return (result);
 }
 
-
-float average(list l) {
-/*
-    Needs implementation.
-*/
-}
-
-list array_to_list(int array[], unsigned int length) {
-    /* Initialize the list */
-    for (unsigned int i = 0u; i < length; ++i) {
-        /* Add element to the list  */
+void print_list(list_pointer l){
+    unsigned int len = length(l);
+    printf("cantidad de elementos %d \n",len);
+    for (unsigned int i=0u; i < len; i++){
+        printf(" %d", index(l,i));
     }
-    /* Return list */
+    printf("\n");
+}  
+
+
+list_pointer array_to_list(int array[], unsigned int length) {
+    /* Initialize the list */
+    list_pointer aux1,aux2,new_node;
+    new_node = create_node();
+    aux1 = new_node;
+
+    for (unsigned int i = 0u; i < length; ++i) {
+        aux2 = addr(aux1,array[i]);
+        aux1 = aux2;
+        
+    }
+    return new_node;
 }
 
+
+float average(list_pointer l) {
+    /*Needs implementation.*/
+    int len,elem,suma;
+    float prom;
+    list_pointer laux,p_aux;
+
+    len = length(l);
+    laux = copy_list(l);
+    
+    suma = 0;
+    
+    while(!is_empty(laux)){
+        elem = head(laux);
+        suma = suma + elem;
+        
+        p_aux = tail(laux);
+        laux = p_aux;
+    }
+    /*Esta mal porque tengo que hacer esto fuera del while pero anda*/
+    elem = head(laux);
+    suma = suma + elem;
+        
+    destroy(laux);
+
+    prom =  (len == 0) ? (float) 0 : (float) suma / len;
+    return prom;
+}
+ 
 int main(int argc, char *argv[]) {
     char *filepath = NULL;
-    FILE *file = NULL;
+    //FILE *file = NULL;
 
     /* parse the filepath given in command line arguments */
     filepath = parse_filepath(argc, argv);
@@ -63,10 +102,12 @@ int main(int argc, char *argv[]) {
     array_dump(array, length);
 
     /* transform from array to our list type */
-    list l = array_to_list(array, length);
-
+    list_pointer l = array_to_list(array, length);
+    
+    //print_list(l);
+    
     /* call the average function */
-    printf("The average is: %.2f \n", average(l));
-
+    printf("The average is: %.2f \n", average(l)); //imprime un doble float %.2f
+    
     return (EXIT_SUCCESS);
 }

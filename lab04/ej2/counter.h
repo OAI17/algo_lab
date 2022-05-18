@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+#define INITIAL_VALUE 0
+
 /* counter as a pointer to structs to guarantee encapsulation */
 typedef struct _counter * counter;
 

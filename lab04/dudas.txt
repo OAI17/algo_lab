@@ -1,19 +1,22 @@
-ver sinonimos 
-ver struc
-
-caudno hago free de un puntero lo que hago es devolver la memoria, pero el puntero sigue apuntando al mismo lugar
-cuando tiro el primero de la lista al rpimer elemento tengo que porner .next = null
-calloc es como maloc pero inicializando la memoria 
-la difenrencia entre <list.h> y "list.h" es que: <> busca en carpeta de sistema y "" importa de la carpeta en la que estoy
-agregar un nodo nuevo y despues hacerlo apuntar donde quiero 
+audno hago free de un puntero lo que hago es devolver la memoria, pero el puntero sigue apuntando al mismo lugar
+calloc es como malloc pero inicializando la memoria 
+la difenrencia entre <list.h> y "list.h" es que: <> busca en carpeta de sistema y "" importa de la carpeta en la que estoy 
 en general no se usan funcoines de tad para definir otras funciones tad, porque no es eficiente 
-
-
+LOS FREE SOLO VAN EN DONDE ME QUIERO DESACER DEL MALLOC, A LAS VARIABLES NO SE LES HACE FREE
 primero compilo .c despues .o 
-ej0)	-hecho
-ej1)	-para mantener la abstraccion yo tengo que usar el programa solo con lo que dice el archivo .h sin importar como se implemente en el .c
+
+ej0)	-done
+ej1)	-done
+	-para mantener la abstraccion yo tengo que usar el programa solo con lo que dice el archivo .h sin importar como se implemente en el .c
 	-es decir en el archivo .c solo puedo usar funciones del .h  
 	-es decir si yo quiero cambiar el .c del .h en main.c puede seguir usando las opciones del .h sin que salte un error 
 	-cuando se hace malloc se reserva el espcio para el contenido del puntero y no para el puntero  
 	-deja de ser polimorfismo cuando le defini el tipo 
-ej1)RESPONDER A TODAS LAS PREGUNTAS
+	falta: RESPONDER A TODAS LAS PREGUNTAS
+
+ej2)done
+ej3)	-done
+	-que significa ese formato printf("The average is: %.2f \n", average(l));
+
+
+	
