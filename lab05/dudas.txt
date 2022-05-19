@@ -1,0 +1,1 @@
+ej1b) crear una estructura con stack y largo del stack que incremente y descrementa con pop y pull 

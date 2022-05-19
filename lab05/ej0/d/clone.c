@@ -5,7 +5,16 @@
 
 char *string_clone(const char *str) {
     char *clone=NULL;
-    /* COMPLETAR */
+    
+    size_t len_str = strlen(str);
+    
+
+    clone = malloc(len_str);
+    
+    for (unsigned int i=0; i < len_str; i++){
+        clone[i] = str[i];
+    }
+    clone[len_str] = '\0';
     return clone;
 }
 

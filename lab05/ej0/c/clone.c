@@ -2,12 +2,12 @@
 #include <stdio.h>
 
 char *string_clone(const char *str, size_t length) {
-    char clone[length + 1];
-    char *output=clone;
+    char *output;
+    output = malloc(length + 1);
     for (size_t i=0; i<length; i++) {
-        clone[i] = str[i];
+        output[i] = str[i];
     }
-    clone[length] = '\0';
+    output[length] = '\0'; //no se pone solo si yo lo estoy completando
     return output;
 }
 
@@ -46,8 +46,8 @@ int main(void) {
     copy = string_clone(original, sizeof(original) - 1);
     printf("Original: %s\n", original);
     printf("Copia   : %s\n", copy);
-
-
+    
+    free(copy);
     return EXIT_SUCCESS;
 }
 

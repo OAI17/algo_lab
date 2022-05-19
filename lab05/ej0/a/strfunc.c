@@ -1,40 +1,41 @@
 #include "strfunc.h"
 
 size_t string_length(const char *str){
-    unsigned int c=0;
-    while(str[c] != '\0'){
-        printf("a %s",str[c]);
-        c = c + 1;
-        
+    size_t counter = 0;
+    char c = '\0';
+
+    while(str[counter] != c){
+        counter = counter + 1;
     }
-    return sizeof(c);
+
+    //printf("%ld",counter);
+    return counter;
 }
 
-/*
-const char concat_str(const char base, const char *new_char){
-    unsigned int i;
-    size_t len = string_length(base);
-    i = len;
-    char new_str[i+1];
-
-    for (unsigned int j=0; j < i; j++){
-        new_str[j] = base[j];
-    }
-    new_str[i] = new_char;
-    return new_str; 
-}
 
 char *string_filter(const char *str, char c){
-    char *aux_str;
-    char resp;
+    size_t len = string_length(str);
+    char *new_str;
+    unsigned int count=0;
+    unsigned int j = 0;
 
-    while(str != '\0'){
-        if (str != c){
-            aux_str = str;
-        } 
-        resp = concat_str(resp,aux_str);
-    return resp;
+    for (unsigned int k=0u; k < len; k++){
+        if (str[k] != c){
+            count = count + 1;
+        }
     }
+
+    new_str = malloc(count * sizeof(char));
+    
+    for (unsigned int i=0; i < len; i++){
+        if (str[i] != c){
+            new_str[j] = str[i];
+            j = j + 1;
+        }    
+        
+    }
+
+    return new_str;
 }
-*/
+
 /*devuelve una nueva cadena en memoria dinámica que se obtiene tomando los caracteres de str que son distintos del caracter c.*/
