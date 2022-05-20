@@ -8,7 +8,6 @@
 #include <stdbool.h>
 
 
-
 /**
 * @brief Stack type definition
 */

@@ -13,8 +13,8 @@ struct _s_stack{
 stack stack_empty(){
     stack new_stack;
     new_stack = malloc(sizeof(stack));
-    //new_stack->next = NULL;
-    //new_stack->value = START_VALUE;
+    new_stack->next = NULL;
+    new_stack->value = START_VALUE;
     return new_stack;
 }
 
@@ -28,10 +28,20 @@ stack stack_push(stack s, stack_elem e){
 
 stack stack_pop(stack s){
     stack temp;
-    if (s != NULL){
+    unsigned int len = stack_size(s);
+    if (len > 1){
         temp = s->next;
+        s->next = NULL;
         free(s);
     }
+    else{ 
+        if(len == 1){
+        free(s);
+        temp = NULL;
+        }
+    }
+
+
     return temp;
 }
 
@@ -41,18 +51,22 @@ unsigned int stack_size(stack s){
     walk_stack = s;
     
     if (walk_stack != NULL){
-        
-        while(walk_stack->next){
-            counter = counter + 1;
-            aux = walk_stack->next;
-            walk_stack = aux;
+        if (walk_stack->next != NULL){
+            while(walk_stack->next){
+                counter = counter + 1;
+                aux = walk_stack->next;
+                walk_stack = aux;
+            }           
+        }
+        else{
+            counter = counter +1;
         }
     }
-
     return counter;
 }
 
 stack_elem stack_top(stack s){
+    assert(s != NULL);
     return s->value;
 }
 
@@ -64,18 +78,28 @@ bool stack_is_empty(stack s){
 
 stack_elem *stack_to_array(stack s){
     unsigned int len = stack_size(s);
-    stack_elem array_stack[len];
+    stack_elem *array_stack;
+
+    array_stack = (stack_elem*)calloc(len,sizeof(stack_elem));
+    
     stack walk_stack,aux;
     stack_elem *pointer_array;
 
     walk_stack = s;
-    for (unsigned int i=0; i < len; i++){
-        array_stack[i] = walk_stack->value;
-        
-        aux = walk_stack->next;
-        walk_stack = aux;
+    if (len != 0){
+        for (unsigned int i=0; i < len;  i++){
+            array_stack[len-i-1] = walk_stack->value;
+            aux = walk_stack->next;
+            walk_stack = aux;
+        }
+
+        pointer_array = array_stack;
     }
-    pointer_array = array_stack;
+
+    else{
+        pointer_array = NULL;
+    }
+
     return pointer_array;
 }
 
@@ -88,12 +112,9 @@ stack stack_destroy(stack s){
 
 void print_stack(stack s){
     unsigned int len = stack_size(s);
-    stack_elem e;
     stack walk,aux;
     walk = s;
     for (unsigned int i=0; i < len; i++){
-        e = walk->value;
-        printf("%d",e);
         aux = walk->next;
         walk = aux;
     }
