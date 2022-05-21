@@ -1,4 +1,6 @@
 ej1b) crear una estructura con stack y largo del stack que incremente y descrementa con pop y pull 
 ej1a) el stack sin nada que seria, next apuntando a null y el valor de value no importa ?
-	FALTA ULTIMAPARTE DEL EJ1A
-pruebas
+	PREGUNTAR SI EN EL EJ DE REVERSE, NO CONVIENE HACER TODO EN UN SOLO FOR
+	done
+
+
