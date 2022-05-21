@@ -7,6 +7,7 @@
 
 #include <stdbool.h>
 
+
 /**
 * @brief Stack type definition
 */
@@ -17,11 +18,17 @@ typedef struct _s_stack *stack;
 */
 typedef int stack_elem;
 
+
+/*New implementation*/
+
+typedef struct base_s *base;
+
+typedef unsigned int base_size;
 /**
 * @brief Creates an empty stack
 * @return An empty stack
 */
-stack stack_empty();
+base stack_empty();
 
 /**
 * @brief Inserts an element at the top of the stack
@@ -29,7 +36,7 @@ stack stack_empty();
 * @param e An element to push into the stack
 * @return The new stack with 'e' at the top
 */
-stack stack_push(stack s, stack_elem e);
+base stack_push(base s, stack_elem e);
 
 /**
 * @brief Removes the element at the top of the stack
@@ -37,14 +44,14 @@ stack stack_push(stack s, stack_elem e);
 * @return The new stack with the top element removed
 * @note Only applies to non-empty stacks
 */
-stack stack_pop(stack s);
+base stack_pop(base s);
 
 /**
 * @brief Returns the size of the stack
 * @param s A stack
 * @return The size of the stack
 */
-unsigned int stack_size(stack s);
+unsigned int stack_size(base s);
 
 /**
 * @brief Returns the element at the top of the stacks
@@ -52,14 +59,14 @@ unsigned int stack_size(stack s);
 * @return The element at the top of the stack
 * @note Only applies to non-empty stacks
 */
-stack_elem stack_top(stack s);
+stack_elem stack_top(base s);
 
 /**
 * @brief Check if the given stack is empty
 * @param s A stack
 * @return true if the stack is empty, false otherwise
 */
-bool stack_is_empty(stack s);
+bool stack_is_empty(base s);
 
 /**
 * @brief Creates an array with all the elements of the stack
@@ -68,14 +75,14 @@ bool stack_is_empty(stack s);
 * becomes the rightmost element of the array. The size of the resulting
 * array is determined by 'stack_size(s)'
 */
-stack_elem *stack_to_array(stack s);
+stack_elem *stack_to_array(base s);
 
 /**
 * @brief Destroys the stack
 * @param s A stack
 * @note All memory resources are freed
 */
-stack stack_destroy(stack s);
+base stack_destroy(base s);
 
 
 #endif

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../stack.h"
+#include "stack.h"
 
 void array_dump(int a[], unsigned int length) {
     fprintf(stdout, "[");
@@ -50,7 +50,7 @@ unsigned int array_from_file(int array[], unsigned int max_size, const char *fil
 }
 
 int *invert_array(unsigned int length,int array[], int new_array[]){
-    stack data_save;
+    base data_save;
     data_save = stack_empty();
 
     /*(1) Pedir el espacio de memoria que necesito*/
