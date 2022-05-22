@@ -2,5 +2,5 @@ ej1b) crear una estructura con stack y largo del stack que incremente y descreme
 ej1a) el stack sin nada que seria, next apuntando a null y el valor de value no importa ?
 	PREGUNTAR SI EN EL EJ DE REVERSE, NO CONVIENE HACER TODO EN UN SOLO FOR
 	done
-
+ej2) 	PARA QUE SIRVEN EL ESTERISCO EN DIFERENTES LUGARRES (son dif tipos de punteros)
 
