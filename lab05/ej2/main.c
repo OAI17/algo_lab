@@ -18,7 +18,7 @@ void array_dump(int a[], unsigned int length) {
     }
 }
 
-
+/*Falta probar el stack_to_array y poner los asersts*/
 int main(void){
     stack new_stack;
     new_stack = stack_empty();
