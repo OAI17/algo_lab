@@ -1,6 +1,9 @@
-ej1b) crear una estructura con stack y largo del stack que incremente y descrementa con pop y pull 
+
 ej1a) el stack sin nada que seria, next apuntando a null y el valor de value no importa ?
 	PREGUNTAR SI EN EL EJ DE REVERSE, NO CONVIENE HACER TODO EN UN SOLO FOR
 	done
-ej2) 	PARA QUE SIRVEN EL ESTERISCO EN DIFERENTES LUGARRES (son dif tipos de punteros)
+ej1b) done 
+ej2) done -->>> Falta probar el stack_to_array y poner los asersts
+
+PARA QUE SIRVEN EL ESTERISCO EN DIFERENTES LUGARRES (son dif tipos de punteros)
 
