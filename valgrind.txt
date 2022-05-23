@@ -1,0 +1,2 @@
+valgrind --leak-check=yes myprog arg1 arg2
+valgrind --leak-check=full myprog arg1 arg2

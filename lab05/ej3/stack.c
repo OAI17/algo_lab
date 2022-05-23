@@ -13,7 +13,7 @@ struct _s_stack {
 
 stack stack_empty(){
     stack new_stack;
-    new_stack = malloc(sizeof(struct _s_stack));
+    new_stack = malloc(sizeof(struct _s_stack)); //(struct _s_stack*)calloc(1,sizeof(struct _s_stack));?
     new_stack->capacity = (unsigned int)INITAIL_CAPACITY;
     new_stack->size = 0u;
     new_stack->elems = (stack_elem*)calloc(INITAIL_CAPACITY,sizeof(stack_elem));
@@ -26,12 +26,12 @@ stack stack_push(stack s, stack_elem e){
     unsigned int old_capacity = s->capacity;
     
     if (s->size == old_capacity){
-        s->elems = (stack_elem*)realloc(s->elems, (old_capacity*sizeof(stack_elem))+(2*sizeof(stack_elem)));
-        
+        s->elems = (stack_elem*)realloc(s->elems, (2*(old_capacity*sizeof(stack_elem))));
+        s->capacity = old_capacity * 2u ;        
     }
+
     s->elems[s->size] = e;
     
-    s->capacity = old_capacity + 2 ;
     s->size = s->size + 1 ;
     
     return s;

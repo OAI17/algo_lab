@@ -2,8 +2,17 @@
 ej1a) el stack sin nada que seria, next apuntando a null y el valor de value no importa ?
 	PREGUNTAR SI EN EL EJ DE REVERSE, NO CONVIENE HACER TODO EN UN SOLO FOR
 	done
+	FALTA SACARLE LOS LEAKS
+
 ej1b) done 
+	FALTA SACARLE LOS LEAKS
+
 ej2) done -->>> Falta probar el stack_to_array y poner los asersts
+	CORREGI:(1)Cuando haces malloc para una estructura no hay que poner el puntero que la apunta sino struc y el nombre; ej malloc(sizeof(struct _s_stack));
+		(2)Cuando haces el destroy, primero hay de liberar la memoria que pedise en calloc
+
+ej3) FALTA
+
 
 PARA QUE SIRVEN EL ESTERISCO EN DIFERENTES LUGARRES (son dif tipos de punteros)
 

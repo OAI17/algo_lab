@@ -12,7 +12,7 @@ struct _s_stack{
 
 stack stack_empty(){
     stack new_stack;
-    new_stack = malloc(sizeof(stack));
+    new_stack = malloc(sizeof(struct _s_stack));
     new_stack->next = NULL;
     new_stack->value = START_VALUE;
     return new_stack;
@@ -20,7 +20,7 @@ stack stack_empty(){
 
 stack stack_push(stack s, stack_elem e){
     stack new_element;
-    new_element = malloc(sizeof(stack));
+    new_element = malloc(sizeof(struct _s_stack));
     new_element->next = s;
     new_element->value = e;
     return new_element;
@@ -83,7 +83,6 @@ stack_elem *stack_to_array(stack s){
     array_stack = (stack_elem*)calloc(len,sizeof(stack_elem));
     
     stack walk_stack,aux;
-    stack_elem *pointer_array;
 
     walk_stack = s;
     if (len != 0){
@@ -93,20 +92,26 @@ stack_elem *stack_to_array(stack s){
             walk_stack = aux;
         }
 
-        pointer_array = array_stack;
     }
 
     else{
-        pointer_array = NULL;
+        array_stack = NULL;
     }
 
-    return pointer_array;
+    return array_stack;
 }
 
 
 stack stack_destroy(stack s){
-    free(s);
-    return s;
+    stack walk,aux;
+    walk = s;
+    while(walk != NULL){
+        aux = walk->next;
+        free(walk);
+        walk = aux;    
+    }
+    free(walk);
+    return NULL;
 }
 
 

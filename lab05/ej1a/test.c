@@ -31,6 +31,9 @@ int main(void){
 
     bool status = (arr == NULL) ? true:false;
     printf("Si ->%d es 1, esta devolviendo null",status);
+
+    stack_destroy(stack_test);
+    free(arr);
     return 0;
 }
 
