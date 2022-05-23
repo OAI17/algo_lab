@@ -2,6 +2,7 @@
 #include <assert.h>
 #include "stack.h"
 #include <stdio.h>
+#include <string.h>
 
 #define INITAIL_CAPACITY 1
 
@@ -12,33 +13,32 @@ struct _s_stack {
 };
 
 stack stack_empty(){
-    stack new_stack;
-    new_stack = malloc(sizeof(struct _s_stack)); //(struct _s_stack*)calloc(1,sizeof(struct _s_stack));?
-    new_stack->capacity = (unsigned int)INITAIL_CAPACITY;
-    new_stack->size = 0u;
-    new_stack->elems = (stack_elem*)calloc(INITAIL_CAPACITY,sizeof(stack_elem));
+    stack new_stack = malloc(sizeof(struct _s_stack));
+    new_stack->capacity = 0;
+    new_stack->size = 0;
+    new_stack->elems = NULL;//(stack_elem*)calloc(2*INITAIL_CAPACITY,sizeof(stack_elem));
     return new_stack;
 }
 
 
 stack stack_push(stack s, stack_elem e){
+    assert(s != NULL);
+    assert(s->capacity >= s->size);
+
     //reasigno el espacio que habia mas dos elementos mas
-    unsigned int old_capacity = s->capacity;
-    
-    if (s->size == old_capacity){
-        s->elems = (stack_elem*)realloc(s->elems, (2*(old_capacity*sizeof(stack_elem))));
-        s->capacity = old_capacity * 2u ;        
+    if (s->size == s->capacity){
+        size_t new_cap = (s->size == 0) ? 1 : 2*s->size;
+        s->elems = realloc(s->elems, new_cap*sizeof(stack_elem));
+        s->capacity = new_cap;    
     }
 
-    s->elems[s->size] = e;
-    
-    s->size = s->size + 1 ;
-    
+    (s->elems)[s->size] = e;
+    ++(s->size);
     return s;
 }
 
-
 stack stack_pop(stack s){
+    assert(s != NULL);
     unsigned int size = s->size;
     s->size = size -1;
     return s;
@@ -46,11 +46,15 @@ stack stack_pop(stack s){
 
 
 unsigned int stack_size(stack s){
+    assert(s != NULL);
     return s->size;
 }
 
 
 stack_elem stack_top(stack s){
+    assert(s != NULL);
+    assert(s->size > 0);
+    assert(s->elems != NULL);
     unsigned int top_ind;
     top_ind = s->size - 1; 
     return s->elems[top_ind];
@@ -58,9 +62,8 @@ stack_elem stack_top(stack s){
 
 
 bool stack_is_empty(stack s){
-    bool status;
-    status = (s->size == 0) ? true : false;
-    return status;
+    assert(s != NULL);
+    return s->size == 0;
 }
 
 stack stack_destroy(stack s){
@@ -70,5 +73,11 @@ stack stack_destroy(stack s){
 }
 
 stack_elem *stack_to_array(stack s){
-    return s->elems;
+    assert(s != NULL);
+    stack_elem *arr = NULL;
+    if (s->size){
+        arr = calloc(s->size, sizeof(stack_elem));
+        arr = memcpy(arr, s->elems, s->size*sizeof(stack_elem));
+    } 
+    return arr;
 }
