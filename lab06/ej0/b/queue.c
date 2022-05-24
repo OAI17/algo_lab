@@ -8,9 +8,8 @@
 
  
 struct s_queue {
-    /*
-     * COMPLETAR para el apartado b)
-     */
+    unsigned int size;
+    struct s_node *last_node;
     struct s_node *first;
 };
 
@@ -41,7 +40,8 @@ static bool invrep(queue q) {
 queue queue_empty(void) {
     queue q=NULL;
     q = malloc(sizeof(struct s_queue));
-    //q->first = malloc(sizeof((struct s_node)));
+    q->size = 0;
+    q->last_node = NULL;
     q->first = NULL;
     assert(invrep(q) && queue_is_empty(q));
     return q;
@@ -50,19 +50,15 @@ queue queue_empty(void) {
 queue queue_enqueue(queue q, queue_elem e) {
     assert(invrep(q));
     struct s_node *new_node = create_node(e);
+    struct s_node *last;
     if (q->first==NULL) {
-        q->first = new_node;
+        q->first = new_node; 
     } else {
-
-        struct s_node *aux,*walk;
-        walk = q->first;
-        while(walk->next != NULL){
-            aux = walk->next;
-            walk = aux;            
-        }
-
-        walk->next = new_node;
+        last = q->last_node;
+        last->next = new_node;
     }
+    q->last_node = new_node;
+    q->size += 1;
     assert(invrep(q) && !queue_is_empty(q));
     return q;
 }
@@ -77,19 +73,8 @@ queue_elem queue_first(queue q) {
     return q->first->elem;
 }
 unsigned int queue_size(queue q) {
-    assert(invrep(q));
-    unsigned int size=0;
-    struct s_node *walk,*aux;
-    if (q->first != NULL){
-        walk = q->first;
-        while(walk->next != NULL){
-            size += 1;
-            aux = walk->next;
-            walk = aux;
-        }    
-        size += 1;
-    }
-    return size;
+    assert(invrep(q));    
+    return q->size;
 }
 
 queue queue_dequeue(queue q) {
@@ -98,6 +83,7 @@ queue queue_dequeue(queue q) {
     q->first = q->first->next;
     killme = destroy_node(killme);
     assert(invrep(q));
+    q->size -= 1;
     return q;
 
 }
