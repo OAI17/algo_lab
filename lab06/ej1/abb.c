@@ -126,14 +126,98 @@ unsigned int abb_length(abb tree) {
     return length;
 }
 
-//abb abb_remove(abb tree, abb_elem e) {
-//    assert(invrep(tree));
-    /*
-     * Needs implementation
-     */
-//    assert(invrep(tree) && !abb_exists(tree, e));
-//    return tree;
-//}
+abb delete_min(abb tree){
+    abb aux1,aux2;
+    aux1 = tree;
+    while(aux1->left != NULL){
+        aux2 = aux1->left;
+        aux1 = aux2;
+    }
+    free(aux1);
+    aux1 = NULL;
+    return tree;
+}
+
+abb abb_remove(abb tree, abb_elem e) {
+    assert(invrep(tree));
+    if (!abb_is_empty(tree)){
+        abb_elem root = tree->elem;
+        if (root == e){
+            
+            
+            /*Identificar en que caso de nodo estoy*/
+                /*Caso 1*/
+            if (tree->left == NULL && tree->right == NULL){
+                free(tree);
+                tree = NULL;
+            }
+
+            else if (tree->left == NULL && tree->right != NULL){
+                /*Caso 2*/
+                abb aux1,aux2;
+                aux2 = tree;
+                aux1 = tree->right;
+                tree = aux1;
+                free(aux2);
+                aux2 = NULL;
+            }
+            
+            else if (tree->right == NULL && tree->left != NULL){
+                /*Caso 3*/
+                abb aux1,aux2;
+                aux2 = tree;
+                aux1 = tree->left;
+                tree = aux1;
+                free(aux2);
+                aux2 = NULL;
+            }
+            
+            else if (tree->left != NULL && tree->right != NULL){
+                /*Caso 4*/
+                abb right,left,aux1,aux2;
+                abb_elem min = abb_min(tree->left);
+                /*eliminar al min del arbol*/
+                tree = delete_min(tree->left);
+
+                /*guardo el left right del nodo a borrar*/
+                right = tree->right;
+                left = tree->left;
+                
+                /*elimino la estructura vieja*/
+                tree->left = abb_destroy(tree->left);
+                tree->right = abb_destroy(tree->right);
+
+                /*Remplazo el nodo a borrar por el max*/
+                tree->elem = min;
+
+                /*Acomodar todo a la izq*/
+                tree->right = left;
+
+                /*reccorrer hasta que tree.right == NUll*/
+                aux1 = tree->right;
+                while(aux1->right != NULL){
+                    aux2 = aux1->right;
+                    aux1 = aux2;
+                }
+                aux1->right = right;
+            }
+            
+        }
+
+        else if (root > e){
+            tree->left = abb_remove(tree->left,e);
+        }
+
+        else{
+            tree->right = abb_remove(tree->right,e);
+        }
+
+
+    }
+    abb_dump(tree);
+    assert(invrep(tree) && !abb_exists(tree, e));
+    return tree;
+}
 
 
 abb_elem abb_root(abb tree) {
