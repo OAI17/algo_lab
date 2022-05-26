@@ -21,25 +21,26 @@ static bool elem_less(abb_elem a, abb_elem b) {
 */
 
 static bool invrep(abb tree) {
+    bool status = true;
     if (tree != NULL){
         abb sub_tree;
         if(tree->left != NULL){
             /*Compara*/
             sub_tree = tree->left;
-            assert(tree->elem > sub_tree->elem); 
+            status = status && (tree->elem > sub_tree->elem); 
             /*Recursion*/
-            invrep(sub_tree);
+            status = status && invrep(sub_tree);
         }
 
         if (tree->right != NULL){
             /*Compara*/ 
             sub_tree = tree->right;
-            assert(tree->elem < sub_tree->elem);
+            status = status && (tree->elem < sub_tree->elem);
             /*Recursion*/ 
-            invrep(sub_tree);
+            status = status && invrep(sub_tree);
         }
     }
-    return true;
+    return status;
 }
 
 abb abb_empty(void) {
@@ -126,11 +127,11 @@ unsigned int abb_length(abb tree) {
     return length;
 }
 
-abb delete_min(abb tree){
+abb delete_max(abb tree){
     abb aux1,aux2;
     aux1 = tree;
-    while(aux1->left != NULL){
-        aux2 = aux1->left;
+    while(aux1->right != NULL){
+        aux2 = aux1->right;
         aux1 = aux2;
     }
     free(aux1);
@@ -174,32 +175,14 @@ abb abb_remove(abb tree, abb_elem e) {
             
             else if (tree->left != NULL && tree->right != NULL){
                 /*Caso 4*/
-                abb right,left,aux1,aux2;
-                abb_elem min = abb_min(tree->left);
-                /*eliminar al min del arbol*/
-                tree = delete_min(tree->left);
-
-                /*guardo el left right del nodo a borrar*/
-                right = tree->right;
-                left = tree->left;
+                /*Busco el max de los min*/
+                abb_elem max = abb_max(tree->left);
                 
-                /*elimino la estructura vieja*/
-                tree->left = abb_destroy(tree->left);
-                tree->right = abb_destroy(tree->right);
+                /*Eliminar al max del arbol*/
+                tree->left = abb_remove(tree->left,max);
 
-                /*Remplazo el nodo a borrar por el max*/
-                tree->elem = min;
-
-                /*Acomodar todo a la izq*/
-                tree->right = left;
-
-                /*reccorrer hasta que tree.right == NUll*/
-                aux1 = tree->right;
-                while(aux1->right != NULL){
-                    aux2 = aux1->right;
-                    aux1 = aux2;
-                }
-                aux1->right = right;
+                /*Remplazo el nodo a borrar por el max de los min*/
+                tree->elem = max;
             }
             
         }
@@ -212,9 +195,7 @@ abb abb_remove(abb tree, abb_elem e) {
             tree->right = abb_remove(tree->right,e);
         }
 
-
     }
-    abb_dump(tree);
     assert(invrep(tree) && !abb_exists(tree, e));
     return tree;
 }
