@@ -62,9 +62,6 @@ abb abb_from_file(const char *filepath) {
 int main(int argc, char *argv[]) {
     char *filepath = NULL;
 
-    
-
-
     /* parse the filepath given in command line arguments */
     filepath = parse_filepath(argc, argv);
 
@@ -103,10 +100,9 @@ int main(int argc, char *argv[]) {
      * Al salir debe liberarse toda la memoria utilizada.
      *
      */
-
+ 
     while (true) {
-
-        system("clear");
+        //system("clear");
         int user_choise;
         printf("\n"
         "* 1 ........ Mostrar árbol por pantalla\n"

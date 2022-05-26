@@ -243,7 +243,7 @@ void abb_dump(abb tree) {
     assert(invrep(tree));
     if (tree != NULL) {
         abb_dump(tree->left);
-        printf("%d ", tree->elem);
+        printf("%d", tree->elem);
         abb_dump(tree->right);
     }
 }
