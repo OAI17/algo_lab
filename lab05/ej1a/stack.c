@@ -5,6 +5,8 @@
 
 #define START_VALUE 0
 
+//int* ptr = (int*)calloc(5,sizeof(int))
+
 struct _s_stack{
     stack_elem value;
     struct _s_stack *next;
