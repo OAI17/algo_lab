@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
      */
  
     while (true) {
-        //system("clear");
+        
         int user_choise;
         printf("\n"
         "* 1 ........ Mostrar árbol por pantalla\n"
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
         );  
         printf("Ingrese una opcion: ");
         scanf("%d",&user_choise);
-
+        system("clear");
         if (user_choise < 8 && user_choise > 0){
             if (user_choise == 1){
                 printf("\n");
