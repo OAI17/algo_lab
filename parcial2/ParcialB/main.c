@@ -95,6 +95,7 @@ int main(int argc, char *argv[]) {
 
     /* call the function for show the priority stack elements */
     pstack_dump(s);
+    pstack_dump(s);
 
     /* destroy instance of pstack */
     s = pstack_destroy(s);

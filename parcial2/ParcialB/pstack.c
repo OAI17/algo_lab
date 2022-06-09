@@ -22,6 +22,7 @@ struct s_node {
 
 static bool invrep(pstack s) {
     assert(s != NULL);
+    assert((s->size == 0) == (s->primer_elem == NULL));
     bool status = true;
     if (s->primer_elem != NULL){
         /*Recorre los nodos*/
@@ -30,7 +31,7 @@ static bool invrep(pstack s) {
         
         while(recorre1->next != NULL){
             recorre2 = recorre1->next;
-            status = status & (recorre2->p <= recorre1->p) ? true : false;    
+            status = status && (recorre2->p <= recorre1->p) ? true : false;    
             recorre1 = recorre2;
         }
     }
@@ -39,11 +40,12 @@ static bool invrep(pstack s) {
 
 
 pstack pstack_empty(void) {
-    pstack s=NULL;
+    pstack s = NULL;
     s = malloc(sizeof(struct s_pstack));
     assert(s != NULL); // Por si no me dan la memoria
     s->primer_elem = NULL;
     s->size = 0;
+    assert(invrep(s) && pstack_is_empty(s));
     return s;
 }
 
@@ -61,8 +63,8 @@ static struct s_node * create_node(pstack_elem e, priority_t priority) {
 static struct s_node * destroy_node(struct s_node *node) {
     assert(node != NULL);
     node->next = NULL;
-    node = NULL;
     free(node);
+    node = NULL;
     assert(node == NULL);
     return node;
 }
@@ -127,7 +129,7 @@ pstack pstack_push(pstack s, pstack_elem e, priority_t priority) {
     else{
         s->primer_elem = new_node;
     }
-
+    assert(invrep(s) && !pstack_is_empty(s));
     return s;
 }
 
@@ -137,27 +139,27 @@ bool pstack_is_empty(pstack s) {
 }
 
 pstack_elem pstack_top(pstack s) {
-    invrep(s);
+    assert(invrep(s) && !pstack_is_empty(s));
     struct s_node *first;
     first = s->primer_elem;
     return first->elem;
 }
 
 priority_t pstack_top_priority(pstack s) {
-    assert(s->primer_elem != NULL);
+    assert(invrep(s) && !pstack_is_empty(s));
     struct s_node *first;
     first = s->primer_elem;
     return first->p;
 }
 
 unsigned int pstack_size(pstack s) {
-    //assert(invrep(s));
+    assert(invrep(s));
     unsigned int size = s->size; //unsigned int size=0; cambio para hacerlo de esta forma
     return size;
 }
 
 pstack pstack_pop(pstack s) {
-    invrep(s);
+    assert(invrep(s) && !pstack_is_empty(s));
     if (s->primer_elem != NULL){
         struct s_node *first,*next_node;
 
@@ -171,6 +173,10 @@ pstack pstack_pop(pstack s) {
             first->next = NULL;
         }
 
+        else{
+            s->primer_elem = NULL;
+       }
+
         destroy_node(first); //libero la memoria del primero
         
     }
@@ -178,17 +184,22 @@ pstack pstack_pop(pstack s) {
 }
 
 pstack pstack_destroy(pstack s) {
-    invrep(s);
-    //struct s_node *recorre1,*recorre2;
-    
+    assert(invrep(s));
+
     /*Quedan nodos por borrar*/
-    if (s->primer_elem != NULL){
+    if (!pstack_is_empty(s)){
         s = pstack_pop(s); // Tiro el prim elem
+        s = pstack_destroy(s); // Borro de forma recursiva
     }
 
-    s->primer_elem = NULL;
-    free(s);
-    assert(s == NULL);
+    /*No quedan nodos*/
+    else{
+        s->primer_elem = NULL;
+        free(s);
+        s = NULL;
+        assert(s == NULL);
+    }
+
     return s;
 }
 
