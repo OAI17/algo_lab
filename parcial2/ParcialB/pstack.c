@@ -86,17 +86,19 @@ pstack pstack_push(pstack s, pstack_elem e, priority_t priority) {
         }
 
         struct s_node *pointer_aux1;
-        bool dif_prim_elem = false;
+        bool is_first = false;
         if (s->primer_elem->p <= priority){
             /*Caso en el que lo tengo que meter el principio*/
             pointer_aux1 = s->primer_elem;
             s->primer_elem = new_node;
             new_node->next = pointer_aux1;
-            dif_prim_elem = true; 
+            pointer_aux1 =  NULL;
+            is_first = true;
+             
         }
 
 
-        if (recorre1->p == priority && !dif_prim_elem){
+        else if (recorre1->p <= priority && !is_first){
             /*Poner el nuevo nodo adelante*/
             pointer_aux1 = recorre1->next; //guardo la referencia del siguiente
             recorre1->next = new_node; //meto el nuevo nodo el medio
@@ -115,11 +117,9 @@ pstack pstack_push(pstack s, pstack_elem e, priority_t priority) {
 
         }
 
-        else{
+        else if (recorre1->next == NULL){
             /*Poner el nuevo atras*/
-            pointer_aux1 = recorre1->next; //guardo la referencia del siguiente
-            recorre1->next = new_node; //meto el nuevo nodo el medio
-            new_node->next = pointer_aux1; //hago apuntar al que le sigue
+            recorre1->next = new_node; //meto el nuevo atras
         }
     }
 
@@ -137,7 +137,7 @@ bool pstack_is_empty(pstack s) {
 }
 
 pstack_elem pstack_top(pstack s) {
-    //invrep(s);
+    invrep(s);
     struct s_node *first;
     first = s->primer_elem;
     return first->elem;
@@ -157,8 +157,7 @@ unsigned int pstack_size(pstack s) {
 }
 
 pstack pstack_pop(pstack s) {
-    //invrep(s);
-    assert(s != NULL);
+    invrep(s);
     if (s->primer_elem != NULL){
         struct s_node *first,*next_node;
 
@@ -179,24 +178,15 @@ pstack pstack_pop(pstack s) {
 }
 
 pstack pstack_destroy(pstack s) {
-    //invrep(s);
-    struct s_node *recorre1,*recorre2;
-    assert(s != NULL);
+    invrep(s);
+    //struct s_node *recorre1,*recorre2;
     
     /*Quedan nodos por borrar*/
     if (s->primer_elem != NULL){
-        recorre1 = s->primer_elem;
-        /*Recorre los nodos*/
-        while(recorre1->next != NULL){
-            recorre2 = recorre1->next;
-            destroy_node(recorre1);
-            recorre1 = recorre2;
-        }
-        destroy_node(recorre1);
+        s = pstack_pop(s); // Tiro el prim elem
     }
 
     s->primer_elem = NULL;
-    s = NULL;
     free(s);
     assert(s == NULL);
     return s;
