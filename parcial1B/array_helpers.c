@@ -40,11 +40,9 @@ unsigned int extra_space_fee_cost(DeliveryTable a) {
       if (f.hour <= FEE_CLOSE_HOUR){
         max = max + f.items_amount;
         if (max > ((type == 0) ? MAX_ALLOWED_BOXES : MAX_ALLOWED_LETTERS)){
-          penalty = penalty + ((type == 0) ? BOX_PENALTY : LETTER_PENALTY);
-          printf("el penalty %u\n",penalty);
+          penalty = ((type == 0) ? BOX_PENALTY + penalty : LETTER_PENALTY + penalty );
         }
       }
-      
     }
   }
   return penalty;
